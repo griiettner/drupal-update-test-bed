@@ -1,0 +1,32 @@
+# Backup files (tar.gz and zip only, SQL files are committed)
+backups/*.tar.gz
+backups/*.zip
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Kubernetes secrets (if any are created)
+*-secret.yaml
+secrets/
+
+# Helm generated files
+*.tgz
+
+# Log files
+*.log
+
+# Environment files
+.env
+.env.local
+
+# memory files
+.memory/
