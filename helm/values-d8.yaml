@@ -1,0 +1,69 @@
+# Helm values for Drupal 8.9 (Phase 1)
+# Reference: https://github.com/bitnami/charts/tree/main/bitnami/drupal
+
+## Drupal image configuration
+image:
+  registry: docker.io
+  repository: bitnami/drupal
+  tag: "8.9.20"
+  pullPolicy: IfNotPresent
+
+## Drupal site configuration
+drupalUsername: admin
+drupalPassword: admin123  # Change in production
+drupalEmail: admin@example.com
+
+## Disable MariaDB (chart default)
+mariadb:
+  enabled: false
+
+## Database configuration - PostgreSQL
+postgresql:
+  enabled: true
+  auth:
+    username: drupal
+    password: drupal123  # Change in production
+    database: drupal
+    postgresPassword: postgres123  # Change in production
+  primary:
+    persistence:
+      enabled: true
+      size: 8Gi
+
+## External database configuration (using PostgreSQL)
+databaseType: postgresql
+
+## Persistence for Drupal files
+persistence:
+  enabled: true
+  storageClass: ""  # Use default storage class
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+## Service configuration
+service:
+  type: ClusterIP
+  port: 80
+
+## Resource limits
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+## Enable metrics (optional)
+metrics:
+  enabled: false
+
+## Volume permissions (for macOS)
+volumePermissions:
+  enabled: true
+
+## Drupal specific settings
+drupalSkipInstall: false
+
+## PHP configuration
+phpMemoryLimit: 512M
